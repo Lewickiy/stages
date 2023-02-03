@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Creative works</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div>
+  <div class="container h1 text-left">
+    Stages
+  </div>
+  <br>
+  <div class="h3 nav-link">
+    <table class="table table-dark">
+      <thead class="table-borderless tab-content text-center">
+      <tr>
+        <th><a th:href="@{/}">Home</a></th>
+        <th><a>Authors</a></th>
+        <th><a th:href="@{/creative_works}">Creative works</a></th>
+        <th><a th:href="@{/genres}">Genres</a></th>
+        <th><a>Personages</a></th>
+        <th><a>Specifications</a></th>
+      </tr>
+      <tr>
+        <th><a>Theatres</a></th>
+        <th><a>Departments</a></th>
+        <th><a>Employees</a></th>
+        <th><a>Bank details</a></th>
+        <th><a>...</a></th>
+        <th><a>...</a></th>
+      </tr>
+      <tr>
+        <th><a>Performances</a></th>
+        <th><a>Acts</a></th>
+        <th><a>Scenography</a></th>
+        <th><a>...</a></th>
+        <th><a>...</a></th>
+        <th><a>...</a></th>
+      </tr>
+      <tr>
+        <th><a th:href="@{/sex}">Sex</a></th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- Основное содержимое -->
+  <div>
+    <div class="container h1 text-left" th:if="${genre.id == null}">
+      Add Genre
+    </div>
+    <div class="container h1 text-left" th:unless="${genre.id == null}">
+      Edit Genre
+    </div>
+    <div class="container text-center">
+      <!-- form here -->
+      <form th:action="@{/genres/save}" th:object="${genre}" method="post" style="max-width: 800px; margin-left: 10px">
+        <input type="hidden" th:field="*{id}" th:value="${genre.id}"/>
+        <div class="m-3">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-4">Genre name:</label>
+            <div class="col-sm-8">
+              <input type="text" th:field="*{name}" class="form-control" required/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-4">Genre description:</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" type="text" th:field="*{description}" required/>
+            </div>
+          </div>
+          <div class="text-center p-3">
+            <button class="btn btn-primary" type="submit">Save</button>
+            <button class="btn btn-secondary m-2" type="button" onclick="cancelForm()">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function cancelForm() {
+    window.location = "[[@{/genres}]]";
+  }
+
+</script>
+</body>
+</html>

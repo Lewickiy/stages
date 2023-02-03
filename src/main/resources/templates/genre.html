@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Creative works</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div>
+  <div class="container h1 text-left">
+    Stages
+  </div>
+  <br>
+  <div class="h3 nav-link">
+    <table class="table table-dark">
+      <thead class="table-borderless tab-content text-center">
+      <tr>
+        <th><a th:href="@{/}">Home</a></th>
+        <th><a >Authors</a></th>
+        <th><a th:href="@{/creative_works}">Creative works</a></th>
+        <th><a th:href="@{/genres}">Genres</a></th>
+        <th><a >Personages</a></th>
+        <th><a >Specifications</a></th>
+      </tr>
+      <tr>
+        <th><a >Theatres</a></th>
+        <th><a >Departments</a></th>
+        <th><a >Employees</a></th>
+        <th><a >Bank details</a></th>
+        <th><a >...</a></th>
+        <th><a >...</a></th>
+      </tr>
+      <tr>
+        <th><a >Performances</a></th>
+        <th><a >Acts</a></th>
+        <th><a >Scenography</a></th>
+        <th><a >...</a></th>
+        <th><a >...</a></th>
+        <th><a >...</a></th>
+      </tr>
+      <tr>
+        <th><a th:href="@{/sex}">Sex</a></th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- Основное содержимое -->
+  <div>
+    <div class="container h1 text-left">
+      Genres <button type="button" class="btn btn-primary m-2 h3" onclick="addGenre()">+</button>
+    </div>
+
+    <div class="container text-center">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr class="table-header">
+          <th>ID</th>
+          <th>Genre</th>
+          <th>Description</th>
+          <th>Actions</th> <!-- TODO edit and delete genre -->
+        </tr>
+        </thead>
+        <tbody>
+          <th:block th:each="genre : ${genresList}">
+          <tr>
+            <td>[[${genre.id}]]</td>
+            <td>[[${genre.name}]]</td>
+            <td class="text-left">[[${genre.description}]]</td>
+            <td>
+              <div class="container-fluid text-center">
+                <a class="h5 mr-3" th:href="@{'/genres/edit/' + ${genre.id}}">Edit</a>
+                <a class="h5 mr-3" th:href="@{'/genres/delete/' + ${genre.id}}">Delete</a>
+              </div>
+            </td>
+          </tr>
+          </th:block>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function addGenre() {
+    window.location = "[[@{/genres/new}]]";
+  }
+</script>
+
+</body>
+</html>

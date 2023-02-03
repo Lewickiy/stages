@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Creative works</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div>
+  <div class="container h1 text-left">
+    Stages
+  </div>
+  <br>
+  <div class="h3 nav-link">
+    <table class="table table-dark">
+      <thead class="table-borderless tab-content text-center">
+      <tr>
+        <th><a th:href="@{/}">Home</a></th>
+        <th><a>Authors</a></th>
+        <th><a th:href="@{/creative_works}">Creative works</a></th>
+        <th><a th:href="@{/genres}">Genres</a></th>
+        <th><a>Personages</a></th>
+        <th><a>Specifications</a></th>
+      </tr>
+      <tr>
+        <th><a>Theatres</a></th>
+        <th><a>Departments</a></th>
+        <th><a>Employees</a></th>
+        <th><a>Bank details</a></th>
+        <th><a>...</a></th>
+        <th><a>...</a></th>
+      </tr>
+      <tr>
+        <th><a>Performances</a></th>
+        <th><a>Acts</a></th>
+        <th><a>Scenography</a></th>
+        <th><a>...</a></th>
+        <th><a>...</a></th>
+        <th><a>...</a></th>
+      </tr>
+      <tr>
+        <th><a th:href="@{/sex}">Sex</a></th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- Основное содержимое -->
+  <div>
+    <div class="container h1 text-left">
+      Creative works
+      <button type="button" class="btn btn-primary m-2 h3" onclick="addCreativeWork()">+</button>
+    </div>
+    <div class="container text-center">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr class="table-header">
+          <th>ID</th>
+          <th>Creative work</th>
+          <th>Description</th>
+          <th>Genre</th>
+          <th>Original publication date</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="creativeWork : ${creativeWorksList}">
+          <tr>
+            <td>[[${creativeWork.id}]]</td>
+            <td>[[${creativeWork.name}]]</td>
+            <td class="text-left">[[${creativeWork.description}]]</td>
+            <td>[[${creativeWork.genre.name}]]</td>
+            <td>[[${creativeWork.originalPublicationDate}]]</td>
+            <td>
+              <div class="container-fluid text-center">
+                <a class="h5 mr-3" th:href="@{'/creative_works/edit/' + ${creativeWork.id}}">Edit</a>
+                <a class="h5 mr-3" th:href="@{'/creative_works/delete/' + ${creativeWork.id}}">Delete</a>
+              </div>
+            </td>
+          </tr>
+        </th:block>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function addCreativeWork() {
+    window.location = "[[@{/creative_works/new}]]";
+  }
+</script>
+
+</body>
+</html>
